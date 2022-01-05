@@ -1,20 +1,28 @@
 {
     "name": "lokipush",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Send logs from NodeJS to Loki!",
     "main": "dist/index.js",
     "types": "dist/index.d.js",
-    "repository": "https://github.com/iAverages/LokiJS.git",
+    "repository": "https://github.com/iAverages/LokiPush.git",
     "author": "Daniel Raybone <me@danielraybone.com> (https://danielraybone.com/)",
     "license": "MIT",
     "scripts": {
-        "build": "tsc --build"
+        "build": "tsc --build",
+        "prepack": "yarn build"
     },
+    "files": [
+        "dist/"
+    ],
     "dependencies": {
         "axios": "^0.24.0",
         "big-integer": "^1.6.51"
     },
     "devDependencies": {
         "@types/node": "^16.11.13"
-    }
+    },
+    "bugs": {
+        "url": "https://github.com/iAverages/LokiPush/issues"
+    },
+    "homepage": "https://github.com/iAverages/LokiPush#readme"
 }
