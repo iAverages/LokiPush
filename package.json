@@ -15,11 +15,11 @@
         "dist/"
     ],
     "dependencies": {
-        "axios": "^0.24.0",
+        "axios": "^0.27.2",
         "big-integer": "^1.6.51"
     },
     "devDependencies": {
-        "@types/node": "^16.11.13",
+        "@types/node": "^18.0.0",
         "typescript": "^4.7.4"
     },
     "bugs": {
