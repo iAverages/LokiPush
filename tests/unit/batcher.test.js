@@ -3,6 +3,10 @@ const url = "http://localhost";
 const logs = ["loki test", "just another loki test", "loki loki loki!", { key: "value" }];
 
 describe("Logs", () => {
+    it("should ensure url is set", () => {
+        expect(() => new Batcher()).toThrowError();
+    });
+
     it("should log in correct order - small", () => {
         const loki = new Batcher(url, {}, false);
         for (const msg in logs) {
