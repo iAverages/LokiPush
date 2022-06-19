@@ -67,7 +67,7 @@ export class Batcher {
             streams: [
                 {
                     stream: {
-                        ...(this.options.metadata ?? {}),
+                        ...(this.options.metadata ?? { source: "lokijs" }),
                     },
                     values: [...this.batch],
                 },
