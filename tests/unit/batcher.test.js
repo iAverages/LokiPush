@@ -32,7 +32,7 @@ describe("Logs", () => {
     it("should return epoch nano time", () => {
         const loki = new Batcher(url, {}, false);
         const ms = Date.now();
-        const ns = ms * 1000000; // 1e6
+        const ns = ms * 1000000 - 1000000; // 1e6
         const lokiNs = parseInt(loki.getEpochNano());
         expect(lokiNs).toBeGreaterThan(ns);
     });
