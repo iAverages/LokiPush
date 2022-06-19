@@ -1,5 +1,7 @@
 import BigInt from "big-integer";
 import fetch from "axios";
+import util from "util";
+
 const loadNs = process.hrtime.bigint();
 const loadMs = Date.now();
 
@@ -19,31 +21,36 @@ export class Batcher {
     private interval: NodeJS.Timer | null = null;
     private numErrors = 0;
 
-    constructor(url: string, options: BatcherOptions = {}) {
+    constructor(url: string, options: BatcherOptions = {}, autostart = true) {
+        if (!url) throw new Error("URL is required");
         this.url = url;
         this.options = options;
         this.timerInterval = options.pushInterval ?? 1000;
-        this.start();
+        this.interval = null;
+        autostart && this.start();
     }
 
-    public start() {
-        if (this.interval) return;
+    public start(): boolean {
+        if (this.interval) return false;
         this.interval = setInterval(() => this.run(), this.timerInterval).unref();
+        return true;
     }
 
-    private async run() {
-        if (this.batch.size === 0) return;
+    private async run(): Promise<boolean> {
+        if (this.batch.size === 0) return false;
         await this.push();
+        return true;
     }
 
-    public stop() {
-        if (!this.interval) return;
+    public stop(): boolean {
+        if (this.interval === null) return false;
         clearInterval(this.interval);
         this.interval = null;
+        return true;
     }
 
-    public addLog(message: string) {
-        this.batch.set(this.getEpochNano(), message);
+    public addLog(...args: any[]) {
+        this.batch.set(this.getEpochNano(), util.format.apply(this, args));
     }
 
     public log = this.addLog;
@@ -80,7 +87,7 @@ export class Batcher {
                 const waitTime = Math.round(Math.max(1, Math.min((this.numErrors - 1) * 5, 60)));
                 console.warn(`Loki requst failed ${this.numErrors} times, waiting ${waitTime} seconds before retrying.`);
                 this.stop();
-                setTimeout(() => this.start(), waitTime * 1000);
+                setTimeout(() => this.start(), waitTime * 1000).unref();
             }
             this.numErrors++;
         }
