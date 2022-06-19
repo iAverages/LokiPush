@@ -79,7 +79,7 @@ describe("Push", () => {
             warn: jest.fn(),
             error: jest.fn(),
         };
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 1; i < 1000; i++) {
             expect(loki.numErrors).toBe(i);
             await loki.push();
         }

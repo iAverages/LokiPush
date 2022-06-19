@@ -21,7 +21,7 @@ describe("Logs", () => {
         }
         const lokiLogs = res.data.data.result[0].values;
         for (let i = 0; i < lokiLogs.length; i++) {
-            const log = logs[i];
+            const log = logs[i + 1];
             const lokiLog = lokiLogs[i][1];
             expect(log).toBe(lokiLog);
         }
