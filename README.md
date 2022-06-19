@@ -1,5 +1,7 @@
 # LokiPush
 
+[![Build Status](<https://ci.danielraybone.com/app/rest/builds/buildType:(id:LokiPush_Build)/statusIcon>)](https://ci.danielraybone.com/buildConfiguration/LokiPush_Build?mode=branches&guest=1)
+
 Simple module to push logs to loki.
 
 ## Usage
