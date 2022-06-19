@@ -6,6 +6,7 @@ const config = {
     transform: {},
     collectCoverage: true,
     coverageReporters: ["lcov", "text", "teamcity"],
+    testResultsProcessor: "jest-teamcity-reporter",
 };
 
 module.exports = config;
