@@ -79,6 +79,6 @@ describe("Push", () => {
             expect(loki.numErrors).toBe(i);
             await loki.push();
         }
-        global.console = console;
+        global.console = consoleTmp;
     });
 });
